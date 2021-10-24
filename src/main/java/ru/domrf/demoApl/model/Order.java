@@ -39,7 +39,7 @@ public class Order {
     @JoinTable(name = "purchase_product",
             joinColumns = {@JoinColumn(name="purchase_fk_id")},
             inverseJoinColumns = {@JoinColumn(name="product_fk_id")})
-    List<Product> products;
+    private List<Product> products;
 
     @Override
     public String toString() {

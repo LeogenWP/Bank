@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.domrf.demoApl.dto.OrderDTO;
 import ru.domrf.demoApl.model.Order;
 import ru.domrf.demoApl.service.OrderService;
 
@@ -21,7 +22,7 @@ public class OrderRestControllerV1 {
     private OrderService orderService;
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Order> getOrder(@PathVariable("id") Integer orderId) {
+    public ResponseEntity<OrderDTO> getOrder(@PathVariable("id") Integer orderId) {
         if(orderId == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -31,8 +32,9 @@ public class OrderRestControllerV1 {
         if(order == null) {
             return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        OrderDTO orderDTO = OrderDTO.toOrderDTO(order);
 
-        return new ResponseEntity<>(order,HttpStatus.OK);
+        return new ResponseEntity<>(orderDTO,HttpStatus.OK);
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
