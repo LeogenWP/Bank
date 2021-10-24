@@ -1,47 +1,43 @@
 CREATE TABLE IF NOT EXISTS person (
-    person_id integer NOT NULL ,
+    person_id integer AUTO_INCREMENT PRIMARY KEY,
     first_name varchar(255),
     phone_number varchar(30),
     email varchar(255),
     username varchar(255),
-    password varchar(255),
-    PRIMARY KEY(person_id)
+    password varchar(255)
 );
 
+
 CREATE TABLE IF NOT EXISTS purchase (
-    purchase_id integer NOT NULL ,
-    person_fk_id integer NOT NULL,
+    purchase_id integer AUTO_INCREMENT PRIMARY KEY,
+    person_fk_id integer,
     created datetime,
     updated datetime,
     delivery_adress varchar(255),
-    purchase_status varchar(30),
-    PRIMARY KEY(purchase_id)
+    purchase_status varchar(30)
 );
 
 CREATE TABLE IF NOT EXISTS product (
-    product_id integer NOT NULL ,
+    product_id integer AUTO_INCREMENT PRIMARY KEY ,
+    barcode varchar(25),
     product_name varchar(255),
-    product_price int,
-    PRIMARY KEY(product_id)
+    product_price varchar(255)
 );
 
 CREATE TABLE IF NOT EXISTS perk (
-    perk_id integer NOT NULL ,
-    perk_name varchar(255),
-    PRIMARY KEY(perk_id)
+    perk_id integer AUTO_INCREMENT PRIMARY KEY,
+    perk_name varchar(255)
 );
 
 CREATE TABLE IF NOT EXISTS purchase_product (
-    purchase_product_id integer NOT NULL ,
+    purchase_product_id integer AUTO_INCREMENT PRIMARY KEY,
     purchase_fk_id integer,
-    product_fk_id integer,
-    PRIMARY KEY(purchase_product_id)
+    product_fk_id integer
 );
 
 CREATE TABLE IF NOT EXISTS person_perk (
-    person_perk_id integer NOT NULL ,
+    person_perk_id integer AUTO_INCREMENT PRIMARY KEY ,
     person_fk_id integer,
-    perk_fk_id integer,
-    PRIMARY KEY(person_perk_id)
+    perk_fk_id integer
 );
 

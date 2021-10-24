@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -29,4 +30,27 @@ public class Order {
     @ManyToOne
     @JoinColumn(name="person_fk_id")
     private User user;
+
+    @ManyToMany(fetch = FetchType.LAZY ,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "purchase_product",
+            joinColumns = {@JoinColumn(name="purchase_fk_id")},
+            inverseJoinColumns = {@JoinColumn(name="product_fk_id")})
+    List<Product> products;
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", created=" + created +
+                ", updated=" + updated +
+                ", deliveryAdress='" + deliveryAdress + '\'' +
+                ", status=" + status +
+                //", user=" + user +
+                ", products=" + products +
+                '}';
+    }
 }

@@ -51,8 +51,6 @@ public class UserServoceImpl implements UserService, UserDetailsService {
         return userRepo.save(user);
     }
 
-
-
     @Override
     public Role saveRole(Role role) {
         log.info("Saving new role {} to the database",role.getName());
@@ -69,6 +67,19 @@ public class UserServoceImpl implements UserService, UserDetailsService {
     @Override
     public User getUser(String username) {
         return userRepo.findByUsername(username);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        User user = userRepo.findByEmail(email);
+        if(user == null) {
+            log.info("User not found in database with email {}",email);
+            //throw new UsernameNotFoundException("User not found in database");
+            user = new User();
+        } else {
+            log.info("User found in database");
+        }
+        return user;
     }
 
     @Override
